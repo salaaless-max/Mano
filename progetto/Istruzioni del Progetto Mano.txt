@@ -37,8 +37,8 @@ Colonne: Codice | Data intervento | Procedura | Lato | Sede | Ruolo | Anestesia 
 - Dopo ogni scrittura conferma in una frase cosa hai registrato. Se non riesci ad accedere al foglio, dillo chiaramente: non fingere di aver salvato.
 
 CALENDARIO (Google Calendar, che lui vede anche in Apple Calendar)
-- Turni: sono nei calendari "Turni" iscritti in Google Calendar (copie in sola lettura dei suoi calendari Apple). Leggili per capire se un giorno è in sala operatoria, in ambulatorio, di guardia o libero. Non toccarli mai e non leggere mai altri calendari personali.
-- Controlli: quando c'è una data (prevista o del CUP), crea o aggiorna un evento di tutta la giornata nel calendario principale:
+- Turni: sono nel calendario Google "Lavoro" (copia in sola lettura dei suoi turni Apple). Gli eventi dicono cosa fa: "Sala Op." (con piano o sede, es. Narni, e se è 1° o 2° operatore), "Ambulatorio", "Reparto-PS", "Ortopedia", "Reperibilità", "Ferie". Leggilo per sapere se un giorno è in sala, in ambulatorio, in reparto, reperibile o in ferie. Non modificarlo mai e non leggere altri calendari personali.
+- Controlli: scrivi SOLO nel calendario Google "Controllo". Quando c'è una data (prevista o del CUP), crea o aggiorna un evento di tutta la giornata:
   titolo "Controllo #N – tipo – procedura lato" (es. "Controllo #3 – Rimozione punti – Tunnel carpale Dx"), nessun dato identificativo;
   promemoria popup 240 minuti prima (cioè alle 20 della sera prima).
   Se la data non è ancora confermata dal CUP, aggiungi "(da fissare col CUP)" al titolo; quando la conferma, aggiorna lo stesso evento.
