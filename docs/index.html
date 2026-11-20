@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mano – Registro</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Registro">
+<meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111317" media="(prefers-color-scheme: dark)">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --text:#14171c; --muted:#6b7280; --line:#e3e6ea;
+  --accent:#0f6e6e; --accent-soft:#e2f1f0; --warn:#b45309; --warn-soft:#fdf1e2;
+  --danger:#b91c1c; --danger-soft:#fde8e8; --ok:#15803d; --ok-soft:#e5f5ea;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111317; --card:#1b1e24; --text:#eef0f3; --muted:#9aa1ad; --line:#2b2f37;
+    --accent:#4fb8b2; --accent-soft:#16302f; --warn:#f0a44b; --warn-soft:#3a2a15;
+    --danger:#f17d7d; --danger-soft:#3b1b1b; --ok:#5fcf86; --ok-soft:#173222;
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif}
+body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:5;background:var(--bg);
+  padding:calc(10px + env(safe-area-inset-top)) 16px 8px;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:22px;letter-spacing:-.01em}
+header p{margin:2px 0 0;color:var(--muted);font-size:13px}
+main{padding:12px 16px 24px;max-width:720px;margin:0 auto}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:22px 4px 8px;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+.item{display:flex;gap:12px;align-items:flex-start}
+.item .grow{flex:1;min-width:0}
+.title{font-weight:600}
+.sub{color:var(--muted);font-size:14px;margin-top:2px}
+.code{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600;font-size:14px;min-width:38px}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.b-acc{background:var(--accent-soft);color:var(--accent)}
+.b-warn{background:var(--warn-soft);color:var(--warn)}
+.b-danger{background:var(--danger-soft);color:var(--danger)}
+.b-ok{background:var(--ok-soft);color:var(--ok)}
+.empty{color:var(--muted);text-align:center;padding:18px 8px;font-size:15px}
+button,.btn{font:inherit;border:0;border-radius:12px;padding:12px 14px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer;width:100%}
+.btn2{background:var(--accent-soft);color:var(--accent)}
+.btn-danger{background:var(--danger-soft);color:var(--danger)}
+.btn-sm{width:auto;padding:8px 12px;font-size:14px;border-radius:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row > *{flex:1}
+label{display:block;font-size:14px;color:var(--muted);margin:12px 2px 6px}
+input,select,textarea{font:inherit;width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text)}
+textarea{min-height:76px;resize:vertical}
+input[type=date],input[type=time]{min-height:46px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--card);color:var(--text);border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-weight:500;font-size:14px;width:auto}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.seg{display:flex;background:var(--line);border-radius:10px;padding:3px;gap:3px}
+.seg button{background:transparent;color:var(--text);padding:9px 6px;font-weight:500;border-radius:8px;font-size:15px}
+.seg button.on{background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.12);font-weight:600}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);
+  display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+nav button{background:transparent;color:var(--muted);font-weight:600;font-size:12px;padding:6px 0;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button svg{width:24px;height:24px}
+nav button.on{color:var(--accent)}
+.banner{background:var(--warn-soft);color:var(--warn);border-radius:var(--radius);padding:12px 14px;font-size:14px;margin-bottom:10px}
+.ctrl{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.ctrl:first-child{border-top:0;margin-top:0;padding-top:0}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;font-size:15px}
+.kv div:nth-child(odd){color:var(--muted)}
+.back{background:transparent;color:var(--accent);width:auto;padding:4px 0;font-weight:600}
+.hidden{display:none!important}
+.toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%);
+  background:var(--text);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;z-index:20;max-width:90vw;text-align:center}
+.small{font-size:13px;color:var(--muted)}
+details summary{cursor:pointer;color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="hTitle">Oggi</h1>
+  <p id="hSub"></p>
+</header>
+<main id="view"></main>
+
+<nav>
+  <button data-tab="oggi" class="on">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Oggi</button>
+  <button data-tab="registro">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Registro</button>
+  <button data-tab="nuovo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Nuovo</button>
+  <button data-tab="impostazioni">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Impostazioni</button>
+</nav>
+<input type="file" id="importFile" accept=".json,application/json" class="hidden">
+
+<script>
+"use strict";
+/* ============================================================
+   Mano – Registro interventi e controlli
+   Tutti i dati restano in questo dispositivo (localStorage).
+   Nessun dato viene inviato a server esterni.
+   ============================================================ */
+
+const STORE_KEY = "mano.registro.v1";
+
+const PROCEDURE = [
+  "Tunnel carpale",
+  "Dito a scatto",
+  "Tenosinovite di De Quervain",
+  "Morbo di Dupuytren",
+  "Neuropatia ulnare al gomito",
+  "Frattura del radio distale",
+  "Frattura di metacarpo",
+  "Frattura di falange",
+  "Ganglio / cisti artrogena",
+  "Sutura tendini flessori",
+  "Sutura tendini estensori",
+  "Ferita",
+  "Rizoartrosi",
+  "Artrosi (altra sede)",
+  "Altro"
+];
+const RUOLI = ["Primo operatore", "Primo operatore con tutor", "Aiuto"];
+const ANESTESIE = ["WALANT", "Locale", "Blocco plessico", "Blocco periferico", "Generale", "Altra"];
+const PRESET_CTRL = [
+  {g:7,   t:"Medicazione", l:"7 gg · medicazione"},
+  {g:14,  t:"Rimozione punti", l:"14 gg · punti"},
+  {g:28,  t:"Controllo", l:"4 settimane"},
+  {g:42,  t:"Controllo", l:"6 settimane"},
+  {g:90,  t:"Controllo", l:"3 mesi"},
+  {g:180, t:"Controllo", l:"6 mesi"},
+  {g:365, t:"Controllo", l:"1 anno"}
+];
+
+/* ---------- stato ---------- */
+let db = load();
+let tab = "oggi";
+let detailId = null;
+
+function emptyDb(){
+  return {versione:1, interventi:[], impostazioni:{dettaglioCalendario:"minimo", oraAvviso:"20:00"}, ultimoBackup:null};
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return emptyDb();
+    const d = JSON.parse(raw);
+    const base = emptyDb();
+    return {...base, ...d, impostazioni:{...base.impostazioni, ...(d.impostazioni||{})}};
+  }catch(e){ return emptyDb(); }
+}
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(db)); }
+  catch(e){ toast("Errore nel salvataggio: spazio non disponibile"); }
+}
+if(navigator.storage && navigator.storage.persist){ navigator.storage.persist().catch(()=>{}); }
+
+/* ---------- utilità date (tutte in ora locale) ---------- */
+const pad = n => String(n).padStart(2,"0");
+function iso(d){ return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+function parseIso(s){ const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); }
+function todayIso(){ return iso(new Date()); }
+function addDays(s, n){ const d = parseIso(s); d.setDate(d.getDate()+n); return iso(d); }
+function diffDays(a, b){ return Math.round((parseIso(b) - parseIso(a)) / 86400000); }
+const GIORNI = ["dom","lun","mar","mer","gio","ven","sab"];
+const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+function fmt(s, conGiorno=true){
+  if(!s) return "";
+  const d = parseIso(s);
+  return (conGiorno ? GIORNI[d.getDay()]+" " : "") + d.getDate()+" "+MESI[d.getMonth()]+" "+d.getFullYear();
+}
+function fmtShort(s){ const d = parseIso(s); return pad(d.getDate())+"/"+pad(d.getMonth()+1); }
+function tolleranza(giorni){ return Math.max(2, Math.round(giorni*0.15)); }
+function relativo(s){
+  const n = diffDays(todayIso(), s);
+  if(n === 0) return "oggi";
+  if(n === 1) return "domani";
+  if(n === -1) return "ieri";
+  return n > 0 ? "tra "+n+" gg" : n*-1+" gg fa";
+}
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+/* ---------- modello ---------- */
+function nomeProc(i){ return i.procedura === "Altro" && i.procedurAltro ? i.procedurAltro : i.procedura; }
+function lato(i){ return i.lato ? i.lato : ""; }
+function descr(i){ return [nomeProc(i), lato(i), i.sede].filter(Boolean).join(" · "); }
+function nextCode(){ return db.interventi.reduce((m,i)=>Math.max(m,i.n||0),0) + 1; }
+function getInt(id){ return db.interventi.find(i=>i.id===id); }
+
+function tuttiControlli(){
+  const out = [];
+  for(const i of db.interventi) for(const c of (i.controlli||[])) out.push({i, c});
+  return out;
+}
+
+/* ---------- calendario (.ics) ---------- */
+function icsEsc(s){ return String(s).replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;"); }
+function utcStamp(d){
+  return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+"T"+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+"Z";
+}
+function fold(line){
+  // righe ICS max 75 ottetti: piegatura semplice per caratteri
+  const out = []; let s = line;
+  while(s.length > 73){ out.push(s.slice(0,73)); s = " " + s.slice(73); }
+  out.push(s); return out.join("\r\n");
+}
+function buildIcs(i, c, {tipo="controllo"} = {}){
+  const st = db.impostazioni;
+  const completo = st.dettaglioCalendario === "completo";
+  let summary, description, dataEv, ora = null;
+  if(tipo === "verifica"){
+    // promemoria per chiedere/verificare la data al CUP
+    dataEv = addDays(c.dataPrevista, -tolleranza(c.giorni));
+    summary = completo
+      ? "Verifica data CUP: "+c.tipo.toLowerCase()+" "+nomeProc(i)+" "+lato(i)+" (#"+i.n+")"
+      : "Verifica data CUP controllo #"+i.n;
+    description = "Finestra prevista: "+fmt(addDays(c.dataPrevista,-tolleranza(c.giorni)),false)+" – "+fmt(addDays(c.dataPrevista,tolleranza(c.giorni)),false)+
+      ".\nApri il Registro Mano e inserisci la data confermata.";
+  } else {
+    dataEv = c.dataConfermata; ora = c.ora || null;
+    summary = completo
+      ? c.tipo+" – "+nomeProc(i)+" "+lato(i)+" (op. "+fmtShort(i.data)+", #"+i.n+")"
+      : c.tipo+" post-op #"+i.n;
+    description = completo
+      ? "Intervento #"+i.n+": "+descr(i)+"\nOperato il "+fmt(i.data,false)+".\nDettagli nel Registro Mano."
+      : "Dettagli nel Registro Mano, codice #"+i.n+".";
+  }
+  // avviso: sera prima all'ora impostata (ora locale) -> trigger assoluto in UTC
+  const [hh, mm] = (st.oraAvviso || "20:00").split(":").map(Number);
+  const avviso = parseIso(addDays(dataEv, -1)); avviso.setHours(hh, mm, 0, 0);
+
+  const lines = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Mano Registro//IT","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    "UID:"+c.id+"-"+tipo+"@mano-registro",
+    "DTSTAMP:"+utcStamp(new Date())
+  ];
+  const ymd = dataEv.replace(/-/g,"");
+  if(ora){
+    const [h, m] = ora.split(":").map(Number);
+    const fine = new Date(parseIso(dataEv)); fine.setHours(h, m+30, 0, 0);
+    lines.push("DTSTART:"+ymd+"T"+pad(h)+pad(m)+"00");
+    lines.push("DTEND:"+iso(fine).replace(/-/g,"")+"T"+pad(fine.getHours())+pad(fine.getMinutes())+"00");
+  } else {
+    lines.push("DTSTART;VALUE=DATE:"+ymd);
+    lines.push("DTEND;VALUE=DATE:"+addDays(dataEv,1).replace(/-/g,""));
+    lines.push("TRANSP:TRANSPARENT");
+  }
+  lines.push("SUMMARY:"+icsEsc(summary));
+  lines.push("DESCRIPTION:"+icsEsc(description));
+  lines.push("BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+icsEsc(summary),"TRIGGER;VALUE=DATE-TIME:"+utcStamp(avviso),"END:VALARM");
+  lines.push("END:VEVENT","END:VCALENDAR");
+  return lines.map(fold).join("\r\n") + "\r\n";
+}
+function b64url(str){
+  const bytes = new TextEncoder().encode(str);
+  let bin = ""; bytes.forEach(b => bin += String.fromCharCode(b));
+  return btoa(bin).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+async function apriInCalendario(ics, nomeFile){
+  // Metodo 1: il service worker genera localmente un URL .ics (nessun dato lascia il telefono).
+  // Safari riconosce il tipo text/calendar e propone "Aggiungi al Calendario".
+  if(navigator.serviceWorker && navigator.serviceWorker.controller){
+    location.href = "ics/" + encodeURIComponent(nomeFile) + "?d=" + b64url(ics);
+    return;
+  }
+  // Metodo 2 (riserva): condivisione del file .ics
+  await condividiFile(ics, nomeFile, "text/calendar");
+}
+async function condividiFile(contenuto, nomeFile, mime){
+  const file = new File([contenuto], nomeFile, {type:mime});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    try{ await navigator.share({files:[file], title:nomeFile}); return true; }
+    catch(e){ if(e.name === "AbortError") return false; }
+  }
+  const url = URL.createObjectURL(file);
+  const a = document.createElement("a"); a.href = url; a.download = nomeFile;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  return true;
+}
+
+/* ---------- interfaccia ---------- */
+const $view = document.getElementById("view");
+const $title = document.getElementById("hTitle");
+const $sub = document.getElementById("hSub");
+
+function toast(msg){
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
+  document.body.appendChild(t); setTimeout(()=>t.remove(), 2600);
+}
+function setHeader(t, s=""){ $title.textContent = t; $sub.textContent = s; }
+
+document.querySelectorAll("nav button").forEach(b => b.addEventListener("click", () => {
+  tab = b.dataset.tab; detailId = null; render();
+}));
+
+function render(){
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+  window.scrollTo(0,0);
+  if(detailId) return renderDettaglio(detailId);
+  ({oggi:renderOggi, registro:renderRegistro, nuovo:()=>renderForm(null), impostazioni:renderImpostazioni})[tab]();
+}
+
+/* ---- OGGI ---- */
+function renderOggi(){
+  const oggi = todayIso();
+  setHeader("Oggi", fmt(oggi));
+  const all = tuttiControlli().filter(x => !x.c.fatto);
+  const daConf = all.filter(x => !x.c.dataConfermata).sort((a,b)=>a.c.dataPrevista.localeCompare(b.c.dataPrevista));
+  const conf = all.filter(x => x.c.dataConfermata).sort((a,b)=>(a.c.dataConfermata+(a.c.ora||"")).localeCompare(b.c.dataConfermata+(b.c.ora||"")));
+  const passati = conf.filter(x => x.c.dataConfermata < oggi);
+  const futuri = conf.filter(x => x.c.dataConfermata >= oggi);
+
+  let h = "";
+  const giorniBackup = db.ultimoBackup ? diffDays(db.ultimoBackup, oggi) : null;
+  if(db.interventi.length && (giorniBackup === null || giorniBackup > 14)){
+    h += `<div class="banner">${giorniBackup === null ? "Non hai ancora fatto un backup." : "Ultimo backup "+giorniBackup+" giorni fa."}
+      Se elimini l'app perdi i dati. <a href="#" data-go="impostazioni" style="color:inherit;font-weight:600">Fai il backup</a></div>`;
+  }
+
+  h += `<h2>Prossimi controlli</h2>`;
+  h += futuri.length ? futuri.map(cardControllo).join("") : `<div class="card empty">Nessun controllo con data confermata.</div>`;
+
+  h += `<h2>Da confermare con il CUP</h2>`;
+  h += daConf.length ? daConf.map(cardControllo).join("") : `<div class="card empty">Niente da confermare.</div>`;
+
+  if(passati.length){
+    h += `<h2>Data passata, da chiudere</h2>` + passati.map(cardControllo).join("");
+  }
+  $view.innerHTML = h;
+  bindCommon();
+}
+function statoBadge(c){
+  const oggi = todayIso();
+  if(c.fatto) return `<span class="badge b-ok">fatto</span>`;
+  if(c.dataConfermata){
+    const n = diffDays(oggi, c.dataConfermata);
+    if(n < 0) return `<span class="badge b-danger">${relativo(c.dataConfermata)}</span>`;
+    if(n <= 1) return `<span class="badge b-warn">${relativo(c.dataConfermata)}</span>`;
+    return `<span class="badge b-acc">${relativo(c.dataConfermata)}</span>`;
+  }
+  const tol = tolleranza(c.giorni);
+  const da = addDays(c.dataPrevista,-tol), a = addDays(c.dataPrevista,tol);
+  if(oggi > a) return `<span class="badge b-danger">finestra superata</span>`;
+  if(oggi >= da) return `<span class="badge b-warn">in finestra</span>`;
+  return `<span class="badge b-acc">${relativo(da)}</span>`;
+}
+function cardControllo({i, c}){
+  const tol = tolleranza(c.giorni);
+  const quando = c.dataConfermata
+    ? fmt(c.dataConfermata) + (c.ora ? " · ore "+c.ora : "")
+    : "probabile tra "+fmt(addDays(c.dataPrevista,-tol),false)+" e "+fmt(addDays(c.dataPrevista,tol),false);
+  return `<div class="card item" data-open="${i.id}">
+    <div class="code">#${i.n}</div>
+    <div class="grow">
+      <div class="title">${esc(c.tipo)} · ${esc(nomeProc(i))} ${esc(lato(i))}</div>
+      <div class="sub">Operato ${fmt(i.data,false)} · ${quando}</div>
+    </div>
+    <div>${statoBadge(c)}</div>
+  </div>`;
+}
+
+/* ---- REGISTRO ---- */
+let filtro = "";
+function renderRegistro(){
+  setHeader("Registro", db.interventi.length + (db.interventi.length===1?" intervento":" interventi"));
+  const q = filtro.trim().toLowerCase();
+  const lista = db.interventi
+    .filter(i => !q || [nomeProc(i), i.lato, i.sede, i.note, i.complicanze, i.anestesia, i.ruolo, "#"+i.n].join(" ").toLowerCase().includes(q))
+    .sort((a,b)=> b.data.localeCompare(a.data) || b.n - a.n);
+  let h = `<input id="cerca" type="search" placeholder="Cerca: procedura, lato, note, #codice" value="${esc(filtro)}">`;
+  h += `<div style="height:10px"></div>`;
+  h += lista.length ? lista.map(i => {
+    const aperti = (i.controlli||[]).filter(c=>!c.fatto).length;
+    return `<div class="card item" data-open="${i.id}">
+      <div class="code">#${i.n}</div>
+      <div class="grow">
+        <div class="title">${esc(nomeProc(i))} ${esc(lato(i))}</div>
+        <div class="sub">${fmt(i.data,false)} · ${esc(i.ruolo||"")}${i.sede ? " · "+esc(i.sede) : ""}</div>
+      </div>
+      ${aperti ? `<span class="badge b-acc">${aperti} ctrl</span>` : ""}
+    </div>`;
+  }).join("") : `<div class="card empty">${q ? "Nessun risultato." : "Nessun intervento registrato.<br>Usa “Nuovo” per aggiungerne uno."}</div>`;
+  $view.innerHTML = h;
+  const s = document.getElementById("cerca");
+  s.addEventListener("input", () => { filtro = s.value; const pos = s.selectionStart; renderRegistro(); const n = document.getElementById("cerca"); n.focus(); n.setSelectionRange(pos,pos); });
+  bindCommon();
+}
+
+/* ---- FORM NUOVO / MODIFICA ---- */
+function renderForm(id){
+  const i = id ? getInt(id) : {data:todayIso(), procedura:"", lato:"", sede:"", ruolo:RUOLI[0], anestesia:"WALANT", complicanze:"", note:""};
+  setHeader(id ? "Modifica #"+i.n : "Nuovo intervento", id ? "" : "Codice assegnato: #"+nextCode());
+  const opt = (arr, v) => arr.map(x => `<option ${x===v?"selected":""}>${esc(x)}</option>`).join("");
+  let h = "";
+  if(id) h += `<button class="back" id="annulla">‹ Annulla</button>`;
+  h += `<div class="card">
+    <label for="f-data">Data intervento</label>
+    <input id="f-data" type="date" value="${i.data}">
+    <label for="f-proc">Procedura</label>
+    <select id="f-proc"><option value="">Scegli…</option>${opt(PROCEDURE, i.procedura)}</select>
+    <div id="altroBox" class="${i.procedura==="Altro"?"":"hidden"}">
+      <label for="f-altro">Specifica procedura</label>
+      <input id="f-altro" value="${esc(i.procedurAltro||"")}" placeholder="es. Artrodesi IFD">
+    </div>
+    <label>Lato</label>
+    <div class="seg" id="f-lato">
+      ${["Dx","Sx","Bilaterale"].map(l=>`<button type="button" class="${i.lato===l?"on":""}" data-v="${l}">${l}</button>`).join("")}
+    </div>
+    <label for="f-sede">Sede / dettaglio (facoltativo)</label>
+    <input id="f-sede" value="${esc(i.sede||"")}" placeholder="es. III dito, zona II flessori, V metacarpo">
+    <div class="row">
+      <div><label for="f-ruolo">Ruolo</label><select id="f-ruolo">${opt(RUOLI, i.ruolo)}</select></div>
+      <div><label for="f-anest">Anestesia</label><select id="f-anest">${opt(ANESTESIE, i.anestesia)}</select></div>
+    </div>
+    <label for="f-compl">Complicanze</label>
+    <input id="f-compl" value="${esc(i.complicanze||"")}" placeholder="Nessuna">
+    <label for="f-note">Note</label>
+    <textarea id="f-note" placeholder="Tecnica, mezzi di sintesi, riabilitazione… (mai nomi o dati identificativi)">${esc(i.note||"")}</textarea>
+  </div>`;
+  if(!id){
+    h += `<h2>Primo controllo previsto (facoltativo)</h2>
+    <div class="card">
+      <div class="chips" id="f-preset">${PRESET_CTRL.map((p,k)=>`<button type="button" class="chip" data-k="${k}">${p.l}</button>`).join("")}</div>
+      <label for="f-gg">Oppure tra quanti giorni</label>
+      <input id="f-gg" type="number" inputmode="numeric" min="1" placeholder="es. 8">
+      <label for="f-tipo">Tipo</label>
+      <select id="f-tipo">${opt(["Controllo","Medicazione","Rimozione punti","Controllo radiografico"], "Controllo")}</select>
+    </div>`;
+  }
+  h += `<button id="salva">${id ? "Salva modifiche" : "Salva intervento"}</button>`;
+  $view.innerHTML = h;
+
+  const proc = document.getElementById("f-proc");
+  proc.addEventListener("change", () => document.getElementById("altroBox").classList.toggle("hidden", proc.value !== "Altro"));
+  let latoV = i.lato;
+  document.querySelectorAll("#f-lato button").forEach(b => b.addEventListener("click", () => {
+    latoV = b.dataset.v; document.querySelectorAll("#f-lato button").forEach(x => x.classList.toggle("on", x === b));
+  }));
+  if(!id){
+    document.querySelectorAll("#f-preset .chip").forEach(b => b.addEventListener("click", () => {
+      const p = PRESET_CTRL[b.dataset.k];
+      const on = !b.classList.contains("on");
+      document.querySelectorAll("#f-preset .chip").forEach(x => x.classList.remove("on"));
+      if(on){ b.classList.add("on"); document.getElementById("f-gg").value = p.g; document.getElementById("f-tipo").value = p.t; }
+      else document.getElementById("f-gg").value = "";
+    }));
+  }
+  if(id) document.getElementById("annulla").addEventListener("click", () => render());
+
+  document.getElementById("salva").addEventListener("click", () => {
+    const data = document.getElementById("f-data").value;
+    const procedura = proc.value;
+    if(!data){ toast("Inserisci la data"); return; }
+    if(!procedura){ toast("Scegli la procedura"); return; }
+    if(procedura === "Altro" && !document.getElementById("f-altro").value.trim()){ toast("Specifica la procedura"); return; }
+    const campi = {
+      data, procedura,
+      procedurAltro: procedura === "Altro" ? document.getElementById("f-altro").value.trim() : "",
+      lato: latoV || "",
+      sede: document.getElementById("f-sede").value.trim(),
+      ruolo: document.getElementById("f-ruolo").value,
+      anestesia: document.getElementById("f-anest").value,
+      complicanze: document.getElementById("f-compl").value.trim(),
+      note: document.getElementById("f-note").value.trim()
+    };
+    if(id){
+      Object.assign(i, campi);
+      // ricalcola le date previste dei controlli non ancora confermati
+      (i.controlli||[]).forEach(c => { if(!c.dataConfermata) c.dataPrevista = addDays(i.data, c.giorni); });
+      save(); toast("Modifiche salvate"); render();
+    } else {
+      const nuovo = {id:uid(), n:nextCode(), ...campi, controlli:[], creato:new Date().toISOString()};
+      const gg = parseInt(document.getElementById("f-gg").value, 10);
+      if(gg > 0) nuovo.controlli.push(nuovoControllo(nuovo, gg, document.getElementById("f-tipo").value));
+      db.interventi.push(nuovo); save();
+      toast("Intervento #"+nuovo.n+" salvato");
+      tab = "registro"; detailId = nuovo.id; render();
+    }
+  });
+}
+function nuovoControllo(i, giorni, tipo){
+  return {id:uid(), tipo, giorni, dataPrevista:addDays(i.data, giorni), dataConfermata:"", ora:"", fatto:false, esito:""};
+}
+
+/* ---- DETTAGLIO ---- */
+function renderDettaglio(id){
+  const i = getInt(id);
+  if(!i){ detailId = null; return render(); }
+  setHeader("#"+i.n+" · "+nomeProc(i), fmt(i.data));
+  const ctrls = (i.controlli||[]).slice().sort((a,b)=>a.dataPrevista.localeCompare(b.dataPrevista));
+  let h = `<button class="back" id="indietro">‹ Indietro</button>`;
+  h += `<div class="card"><div class="kv">
+    <div>Procedura</div><div>${esc(nomeProc(i))}</div>
+    <div>Lato</div><div>${esc(i.lato||"—")}</div>
+    ${i.sede ? `<div>Sede</div><div>${esc(i.sede)}</div>` : ""}
+    <div>Data</div><div>${fmt(i.data)}</div>
+    <div>Ruolo</div><div>${esc(i.ruolo)}</div>
+    <div>Anestesia</div><div>${esc(i.anestesia)}</div>
+    <div>Complicanze</div><div>${esc(i.complicanze||"Nessuna")}</div>
+    ${i.note ? `<div>Note</div><div style="white-space:pre-wrap">${esc(i.note)}</div>` : ""}
+  </div>
+  <div style="height:12px"></div>
+  <button class="btn2 btn-sm" id="modifica">Modifica dati</button>
+  </div>`;
+
+  h += `<h2>Controlli</h2><div class="card">`;
+  h += ctrls.length ? ctrls.map(c => blocoControllo(i, c)).join("") : `<div class="empty">Nessun controllo programmato.</div>`;
+  h += `</div>`;
+
+  h += `<h2>Aggiungi controllo</h2><div class="card">
+    <div class="chips" id="add-preset">${PRESET_CTRL.map((p,k)=>`<button type="button" class="chip" data-k="${k}">${p.l}</button>`).join("")}</div>
+    <div class="row" style="margin-top:6px">
+      <div><label for="add-gg">Giorni dall'intervento</label><input id="add-gg" type="number" inputmode="numeric" min="1" placeholder="es. 8"></div>
+      <div><label for="add-tipo">Tipo</label><select id="add-tipo">${["Controllo","Medicazione","Rimozione punti","Controllo radiografico"].map(x=>`<option>${x}</option>`).join("")}</select></div>
+    </div>
+    <div style="height:12px"></div>
+    <button id="add-ok">Aggiungi</button>
+  </div>`;
+
+  h += `<div style="height:24px"></div><button class="btn-danger" id="elimina">Elimina intervento</button>`;
+  $view.innerHTML = h;
+
+  document.getElementById("indietro").addEventListener("click", () => { detailId = null; render(); });
+  document.getElementById("modifica").addEventListener("click", () => { detailId = null; tab = "registro"; renderForm(i.id); });
+  document.getElementById("elimina").addEventListener("click", () => {
+    if(confirm("Eliminare definitivamente l'intervento #"+i.n+" e i suoi controlli?")){
+      db.interventi = db.interventi.filter(x => x.id !== i.id); save(); detailId = null; toast("Eliminato"); render();
+    }
+  });
+  document.querySelectorAll("#add-preset .chip").forEach(b => b.addEventListener("click", () => {
+    const p = PRESET_CTRL[b.dataset.k];
+    document.querySelectorAll("#add-preset .chip").forEach(x => x.classList.toggle("on", x === b));
+    document.getElementById("add-gg").value = p.g; document.getElementById("add-tipo").value = p.t;
+  }));
+  document.getElementById("add-ok").addEventListener("click", () => {
+    const gg = parseInt(document.getElementById("add-gg").value, 10);
+    if(!(gg > 0)){ toast("Indica tra quanti giorni"); return; }
+    i.controlli = i.controlli || [];
+    i.controlli.push(nuovoControllo(i, gg, document.getElementById("add-tipo").value));
+    save(); toast("Controllo aggiunto"); renderDettaglio(id);
+  });
+
+  // azioni sui singoli controlli
+  $view.querySelectorAll("[data-c]").forEach(el => {
+    const c = i.controlli.find(x => x.id === el.dataset.c);
+    const q = sel => el.querySelector(sel);
+    q(".c-conf")?.addEventListener("click", () => {
+      const d = q(".c-data").value;
+      if(!d){ toast("Inserisci la data del CUP"); return; }
+      c.dataConfermata = d; c.ora = q(".c-ora").value || ""; save(); toast("Data confermata"); renderDettaglio(id);
+    });
+    q(".c-cal")?.addEventListener("click", () => apriInCalendario(buildIcs(i, c), "controllo-"+i.n+".ics"));
+    q(".c-ver")?.addEventListener("click", () => apriInCalendario(buildIcs(i, c, {tipo:"verifica"}), "verifica-"+i.n+".ics"));
+    q(".c-fatto")?.addEventListener("click", () => { c.fatto = !c.fatto; save(); renderDettaglio(id); });
+    q(".c-mod")?.addEventListener("click", () => { c.dataConfermata = ""; c.ora = ""; save(); renderDettaglio(id); });
+    q(".c-del")?.addEventListener("click", () => {
+      if(confirm("Eliminare questo controllo?")){ i.controlli = i.controlli.filter(x => x.id !== c.id); save(); renderDettaglio(id); }
+    });
+    q(".c-esito")?.addEventListener("change", e => { c.esito = e.target.value; save(); toast("Annotazione salvata"); });
+  });
+}
+function blocoControllo(i, c){
+  const tol = tolleranza(c.giorni);
+  const da = addDays(c.dataPrevista,-tol), a = addDays(c.dataPrevista,tol);
+  let h = `<div class="ctrl" data-c="${c.id}">
+    <div class="item"><div class="grow">
+      <div class="title">${esc(c.tipo)} · ${c.giorni} gg</div>
+      <div class="sub">Previsto ${fmt(c.dataPrevista,false)} (finestra ${fmtShort(da)}–${fmtShort(a)})</div>
+    </div>${statoBadge(c)}</div>`;
+  if(!c.dataConfermata){
+    h += `<div class="row" style="margin-top:10px">
+        <div><label>Data CUP</label><input class="c-data" type="date" value="${c.dataPrevista}"></div>
+        <div><label>Ora (facoltativa)</label><input class="c-ora" type="time"></div>
+      </div>
+      <div style="height:10px"></div>
+      <div class="row"><button class="c-conf btn-sm">Conferma data</button>
+      <button class="c-ver btn2 btn-sm">Promemoria verifica</button></div>`;
+  } else {
+    h += `<div class="sub" style="margin-top:8px;color:var(--text)"><b>Confermato:</b> ${fmt(c.dataConfermata)}${c.ora ? " · ore "+c.ora : ""}</div>
+      <div style="height:10px"></div>
+      <div class="row"><button class="c-cal btn-sm">Aggiungi al Calendario</button>
+      <button class="c-fatto btn2 btn-sm">${c.fatto ? "Riapri" : "Segna fatto"}</button></div>
+      <div class="row" style="margin-top:8px"><button class="c-mod btn2 btn-sm">Cambia data</button></div>`;
+    h += `<label>Annotazione del controllo</label><textarea class="c-esito" placeholder="es. ferita ok, iniziata FKT">${esc(c.esito||"")}</textarea>`;
+  }
+  h += `<div style="margin-top:8px"><button class="c-del back" style="color:var(--danger);font-size:14px">Elimina controllo</button></div></div>`;
+  return h;
+}
+
+/* ---- IMPOSTAZIONI ---- */
+function renderImpostazioni(){
+  setHeader("Impostazioni", "");
+  const st = db.impostazioni;
+  let h = `<h2>Calendario</h2><div class="card">
+    <label>Cosa scrivere negli eventi del calendario</label>
+    <div class="seg" id="s-det">
+      <button type="button" data-v="minimo" class="${st.dettaglioCalendario==="minimo"?"on":""}">Solo codice</button>
+      <button type="button" data-v="completo" class="${st.dettaglioCalendario==="completo"?"on":""}">Procedura e lato</button>
+    </div>
+    <p class="small" id="s-esempio"></p>
+    <label for="s-ora">Avviso la sera prima, alle ore</label>
+    <input id="s-ora" type="time" value="${st.oraAvviso}">
+  </div>
+
+  <h2>Backup</h2><div class="card">
+    <p class="small" style="margin-top:0">I dati sono solo in questo iPhone. Salva il backup su iCloud Drive (app File) almeno ogni due settimane.
+    Ultimo backup: <b>${db.ultimoBackup ? fmt(db.ultimoBackup) : "mai"}</b>.</p>
+    <button id="b-exp">Esporta backup</button>
+    <div style="height:8px"></div>
+    <button class="btn2" id="b-imp">Importa backup</button>
+  </div>
+
+  <h2>Privacy</h2><div class="card small">
+    Nessun dato viene inviato a server: l'app funziona interamente nel telefono.
+    Non inserire mai nomi, date di nascita, numeri di cartella o altri dati che identificano il paziente.
+    Gli eventi aggiunti ad Apple Calendar invece vengono sincronizzati su iCloud: per questo l'impostazione predefinita scrive solo il codice.
+    Se il calendario è condiviso con altre persone, aggiungi i controlli a un calendario non condiviso.
+  </div>
+
+  <h2>Zona pericolosa</h2>
+  <button class="btn-danger" id="b-reset">Cancella tutti i dati</button>
+  <p class="small" style="text-align:center;margin-top:18px">Mano – Registro · v1.0</p>`;
+  $view.innerHTML = h;
+
+  const esempio = () => {
+    document.getElementById("s-esempio").textContent = db.impostazioni.dettaglioCalendario === "minimo"
+      ? "Esempio: «Rimozione punti post-op #12»"
+      : "Esempio: «Rimozione punti – Tunnel carpale Dx (op. 12/11, #12)». Attenzione: questi dati finiscono su iCloud.";
+  };
+  esempio();
+  document.querySelectorAll("#s-det button").forEach(b => b.addEventListener("click", () => {
+    db.impostazioni.dettaglioCalendario = b.dataset.v; save();
+    document.querySelectorAll("#s-det button").forEach(x => x.classList.toggle("on", x === b)); esempio();
+  }));
+  document.getElementById("s-ora").addEventListener("change", e => { db.impostazioni.oraAvviso = e.target.value || "20:00"; save(); toast("Salvato"); });
+
+  document.getElementById("b-exp").addEventListener("click", async () => {
+    const contenuto = JSON.stringify({...db, esportato:new Date().toISOString()}, null, 2);
+    const ok = await condividiFile(contenuto, "mano-backup-"+todayIso()+".json", "application/json");
+    if(ok){ db.ultimoBackup = todayIso(); save(); renderImpostazioni(); toast("Backup creato: salvalo in File › iCloud Drive"); }
+  });
+  const fileIn = document.getElementById("importFile");
+  document.getElementById("b-imp").addEventListener("click", () => { fileIn.value = ""; fileIn.click(); });
+  fileIn.onchange = async () => {
+    const f = fileIn.files[0]; if(!f) return;
+    try{
+      const d = JSON.parse(await f.text());
+      if(!Array.isArray(d.interventi)) throw new Error("formato");
+      if(!confirm("Importare "+d.interventi.length+" interventi? I dati attuali di questo dispositivo verranno sostituiti.")) return;
+      const base = emptyDb();
+      db = {...base, ...d, impostazioni:{...base.impostazioni, ...(d.impostazioni||{})}};
+      delete db.esportato; save(); toast("Importati "+db.interventi.length+" interventi"); tab = "oggi"; render();
+    }catch(e){ toast("File non valido"); }
+  };
+  document.getElementById("b-reset").addEventListener("click", () => {
+    if(confirm("Cancellare TUTTI i dati del registro da questo dispositivo?") && confirm("Sicuro? L'operazione non si può annullare.")){
+      db = emptyDb(); save(); toast("Dati cancellati"); tab = "oggi"; render();
+    }
+  });
+}
+
+function bindCommon(){
+  $view.querySelectorAll("[data-open]").forEach(el => el.addEventListener("click", () => { detailId = el.dataset.open; tab = "registro"; render(); }));
+  $view.querySelectorAll("[data-go]").forEach(el => el.addEventListener("click", e => { e.preventDefault(); tab = el.dataset.go; detailId = null; render(); }));
+}
+
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+// aggiorna la vista "Oggi" quando l'app torna in primo piano (es. il giorno dopo)
+document.addEventListener("visibilitychange", () => { if(!document.hidden && tab === "oggi" && !detailId) render(); });
+render();
+</script>
+</body>
+</html>
