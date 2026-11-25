@@ -12,3 +12,24 @@ Sul PC, con Claude Code locale:
 3. Verifica: `/ruflo-status`
 
 Cautele: progetto di terzi; hook non a versione fissa.
+
+---
+
+# Progetto: assistente unico (stile "Jarvis") — quando c'è il PC
+
+Obiettivo: un'unica voce per casa (luci, robot, musica — oggi su Alexa) e agenda/lavoro.
+
+Architettura proposta:
+- **Home Assistant** su apparecchio dedicato sempre acceso (~100–150 €); il PC serve solo per l'installazione.
+- **Claude** come agente conversazionale tramite l'integrazione ufficiale Anthropic di Home Assistant (API a consumo).
+- Accesso vocale da iPhone (app Home Assistant / Siri) o microfoni domestici dedicati.
+- Dispositivi Alexa importati in Home Assistant dove possibile.
+
+Tappe:
+1. Installare Home Assistant e importare i dispositivi.
+2. Collegare Claude come assistente vocale.
+3. Aggiungere Google Calendar (turni "Lavoro" + calendario principale).
+4. Poi: promemoria proattivi ed email.
+
+Domande aperte: PC Mac o Windows? Acquisto apparecchio dedicato? Priorità: casa, agenda o entrambe?
+Vincolo: nessun dato di pazienti nel sistema.
