@@ -33,3 +33,30 @@ Tappe:
 
 Domande aperte: PC Mac o Windows? Acquisto apparecchio dedicato? Priorità: casa, agenda o entrambe?
 Vincolo: nessun dato di pazienti nel sistema.
+
+---
+
+# Brain – secondo cervello (stato al 25/11/2026)
+
+Pagina Notion privata "Brain" con sezioni: 1. Profilo, 2. Valori e obiettivi, 3. Lavoro,
+4. Studio, 5. Progetti, 6. Vita e casa, 7. Indice artefatti, 8. Registro operatorio, Inbox.
+
+Regole: nessun dato di pazienti; dati finanziari solo da Bilance.
+
+Automatismi attivi (attività programmate su claude.ai):
+- Lun-ven 7:45 – Smistamento posta; il lunedì anche 3 domande di ripasso da una scheda
+  (registro in "4. Studio", priorità: radio distale, scafoide, carpo, rizoartrosi…).
+- Ogni sera – Archivio e indice di Google Drive (foglio "Jarvis – Archivio file").
+- Domenica 20:40 – "Brain – aggiornamento della domenica": finanze da Bilance, settimana
+  in arrivo dal calendario, registro operatorio (sedute dal calendario "Lavoro" + interventi
+  anonimizzati dal foglio "Mano – Registro interventi"), Inbox (lezioni dalla sala, palestra).
+- Prima domenica del mese – revisione mensile in "2. Valori e obiettivi".
+
+Da verificare:
+- Primo riepilogo domenica 29/11 e primo ripasso lunedì 30/11.
+- Permessi automatici dell'aggiornamento della domenica (non risultano nei dati).
+- Collegamenti dell'aggiornamento della domenica: tenere almeno Notion, Bilance,
+  Google Calendar, Gmail, Google Sheets.
+
+Quando c'è il PC:
+- Valutare di collegare Brain all'assistente unico (Home Assistant + Claude) come contesto.
